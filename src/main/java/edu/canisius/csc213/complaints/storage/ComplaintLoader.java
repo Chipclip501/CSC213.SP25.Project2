@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+
 
 /**
  * Handles loading of complaints and embedding data,
@@ -27,15 +27,24 @@ public class ComplaintLoader {
      */
     public static List<Complaint> loadComplaintsWithEmbeddings(String csvPath, String jsonlPath) throws Exception {
         // TODO: Load CSV and JSONL resources, parse, and return hydrated Complaint list
-        try (Scanner scnr = new Scanner(new FileInputStream(csvPath))) {
-            while(scnr.hasNextLine()){
-                
-
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
+        List<Complaint> complaints;
+        try (InputStream csvStream = new FileInputStream(csvPath)) {
+            complaints = new CsvToBeanBuilder<Complaint>(new InputStreamReader(csvStream, StandardCharsets.UTF_8))
+                    .withType(Complaint.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build()
+                    .parse();
         }
-        
-        return List.of(); // placeholder
+
+        // Load embeddings from JSONL
+        Map<Long, double[]> embeddings;
+        try (InputStream jsonlStream = new FileInputStream(jsonlPath)) {
+            embeddings = EmbeddingLoader.loadEmbeddings(jsonlStream);
+        }
+
+        // Merge embeddings into complaints
+        ComplaintMerger.mergeEmbeddings(complaints, embeddings);
+
+        return complaints;
     }
 }
