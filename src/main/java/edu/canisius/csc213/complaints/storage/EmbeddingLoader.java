@@ -1,5 +1,6 @@
 package edu.canisius.csc213.complaints.storage;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -21,7 +22,7 @@ public class EmbeddingLoader {
      */
     public static Map<Long, double[]> loadEmbeddings(InputStream jsonlStream) throws IOException {
         // TODO: Implement parsing of JSONL to extract complaintId and embedding
-        Map<Long, double[]> embeddings = new HashMap<>();
+       /*  Map<Long, double[]> embeddings = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(jsonlStream))) {
             String line;
@@ -40,11 +41,11 @@ public class EmbeddingLoader {
         }
         return embeddings;
     }
+*/
 
 
 
 
-/* 
         Map<Long, double[]> embeddings = new HashMap<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(jsonlStream));
         String line;
@@ -54,7 +55,7 @@ public class EmbeddingLoader {
             if (line.isEmpty()) continue; // Skip empty lines
             // Parse each line as a JSON object
             Map<String, Object> jsonObject = objectMapper.readValue(line, new TypeReference<>() {});
-            Long complaintId = ((Number) jsonObject.get("complaintId")).longValue();
+            Long complaintId = ((Number) jsonObject.get("id")).longValue();
             List<Double> embeddingList = objectMapper.convertValue(jsonObject.get("embedding"), new com.fasterxml.jackson.core.type.TypeReference<List<Double>>() {});
 
             // Convert List<Double> to double[]
@@ -68,5 +69,5 @@ public class EmbeddingLoader {
         }
         return embeddings;
     }
-*/
+
 }

@@ -12,8 +12,8 @@ public class ComplaintLoaderTest {
     @Test
     public void testLoadComplaintsWithEmbeddings() throws Exception {
         List<Complaint> complaints = ComplaintLoader.loadComplaintsWithEmbeddings(
-                "/complaints_sample_1_30.csv", // does this point to the actual file or what
-                "/embeddings_sample_1_30.jsonl"
+                "src/test/resources/complaints_sample_1_30.csv", // updated to relative path
+                "src/test/resources/embeddings_sample_1_30.jsonl" // updated to relative path
         );
 
         assertNotNull(complaints, "Complaint list should not be null");
