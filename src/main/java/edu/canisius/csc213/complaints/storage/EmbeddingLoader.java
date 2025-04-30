@@ -55,7 +55,7 @@ public class EmbeddingLoader {
             if (line.isEmpty()) continue; // Skip empty lines
             // Parse each line as a JSON object
             Map<String, Object> jsonObject = objectMapper.readValue(line, new TypeReference<>() {});
-            Long complaintId = ((Number) jsonObject.get("id")).longValue();
+            Long complaintId = Long.parseLong((String) jsonObject.get("id"));
             List<Double> embeddingList = objectMapper.convertValue(jsonObject.get("embedding"), new com.fasterxml.jackson.core.type.TypeReference<List<Double>>() {});
 
             // Convert List<Double> to double[]

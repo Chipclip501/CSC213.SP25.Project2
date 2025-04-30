@@ -28,6 +28,8 @@ public class ComplaintLoader {
     public static List<Complaint> loadComplaintsWithEmbeddings(String csvPath, String jsonlPath) throws Exception {
         // TODO: Load CSV and JSONL resources, parse, and return hydrated Complaint list
         List<Complaint> complaints;
+        String currentDirectory = System.getProperty("user.dir");
+        System.out.println("Current working directory: " + currentDirectory);
         try (InputStream csvStream = new FileInputStream(csvPath)) {
             complaints = new CsvToBeanBuilder<Complaint>(new InputStreamReader(csvStream, StandardCharsets.UTF_8))
                     .withType(Complaint.class)
