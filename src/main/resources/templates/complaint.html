@@ -6,7 +6,7 @@
 <body>
 <h2>Complaint ID: <span th:text="${complaint.complaintId}"></span></h2>
 
-<p th:if="${error != null}" th:text="${error}" style="color: red;"></p>
+<p th:if="${error != null}" th:text="${error}" style="color: rgb(238, 119, 8);"></p>
 
 <!-- Displaying Complaint Details -->
 <p><strong>Date Received:</strong> <span th:text="${complaint.dateReceivedStr}">[No Date]</span></p>
@@ -30,7 +30,7 @@
     <button type="submit">Go</button>
 </form>
 
-<p th:if="${error != null}" th:text="${error}" style="color: red;"></p>
+<p th:if="${error != null}" th:text="${error}" style="color: rgb(238, 119, 8);"></p>
 
 
 <hr/>

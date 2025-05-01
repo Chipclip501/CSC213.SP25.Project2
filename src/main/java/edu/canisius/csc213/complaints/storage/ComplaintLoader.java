@@ -30,7 +30,9 @@ public class ComplaintLoader {
         List<Complaint> complaints;
         String currentDirectory = System.getProperty("user.dir");
         System.out.println("Current working directory: " + currentDirectory);
-        try (InputStream csvStream = new FileInputStream(csvPath)) {
+        try (InputStream csvStream = new FileInputStream(csvPath)) { // Use FileInputStream to read the CSV file
+            // Parse CSV into Complaint objects
+            // Use CsvToBeanBuilder to parse the CSV file
             complaints = new CsvToBeanBuilder<Complaint>(new InputStreamReader(csvStream, StandardCharsets.UTF_8))
                     .withType(Complaint.class)
                     .withIgnoreLeadingWhiteSpace(true)

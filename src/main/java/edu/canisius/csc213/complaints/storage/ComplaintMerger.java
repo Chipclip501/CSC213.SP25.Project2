@@ -15,7 +15,8 @@ public class ComplaintMerger {
      */
     public static void mergeEmbeddings(List<Complaint> complaints, Map<Long, double[]> embeddings) {
         // TODO: For each complaint, match the ID to an embedding and set it
-        for (Complaint complaint : complaints) {
+        for (Complaint complaint : complaints) { // Iterate through each complaint
+            // For each complaint, get the ID and find the corresponding embedding
             long id = complaint.getComplaintId();
             double[] embedding = embeddings.get(id);
             if (embedding != null) {

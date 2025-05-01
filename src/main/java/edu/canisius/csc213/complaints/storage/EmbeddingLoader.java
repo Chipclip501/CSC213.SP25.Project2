@@ -21,32 +21,7 @@ public class EmbeddingLoader {
      * @throws IOException if the file cannot be read or parsed
      */
     public static Map<Long, double[]> loadEmbeddings(InputStream jsonlStream) throws IOException {
-        // TODO: Implement parsing of JSONL to extract complaintId and embedding
-       /*  Map<Long, double[]> embeddings = new HashMap<>();
-        ObjectMapper mapper = new ObjectMapper();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(jsonlStream))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Map<String, Object> obj = mapper.readValue(line, Map.class);
-                Long complaintId = ((Number) obj.get("Complaint ID")).longValue();
-                List<Number> embeddingList = (List<Number>) obj.get("embedding");
-
-                double[] embedding = new double[embeddingList.size()];
-                for (int i = 0; i < embeddingList.size(); i++) {
-                    embedding[i] = embeddingList.get(i).doubleValue();
-                }
-
-                embeddings.put(complaintId, embedding);
-            }
-        }
-        return embeddings;
-    }
-*/
-
-
-
-
-        Map<Long, double[]> embeddings = new HashMap<>();
+         Map<Long, double[]> embeddings = new HashMap<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(jsonlStream));
         String line;
         ObjectMapper objectMapper = new ObjectMapper();
